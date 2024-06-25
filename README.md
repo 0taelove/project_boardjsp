@@ -1718,8 +1718,8 @@ org.apache.ibatis.session.defaults.DefaultSqlSession@6692b6c6
     <root level="INFO">
         <appender-ref ref="stdout"/>
     </root>
-  
-   <logger name="org.choongang.member.mapper" level="DEBUG" />
+
+    <logger name="org.choongang.member.mappers" level="DEBUG"/>
 </configuration>
 ```
 
@@ -1729,8 +1729,8 @@ org.apache.ibatis.session.defaults.DefaultSqlSession@6692b6c6
 ```xml
 
 ...
-<logger name="org.choongang.member.mapper" level="DEBUG" />
-...
+<logger name="org.choongang.member.mappers" level="DEBUG"/>
+        ...
 
 ```
 
@@ -1760,7 +1760,7 @@ CREATE SEQUENCE SEQ_MEMBER;
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.choongang.member.mapper.MemberMapper">
+<mapper namespace="org.choongang.member.mappers.MemberMapper">
 
 </mapper>
 ```
@@ -1768,7 +1768,7 @@ CREATE SEQUENCE SEQ_MEMBER;
 ### src/main/java/org/choongang/member/mapper/MemberMapper.java
 
 ```java
-package org.choongang.member.mapper;
+package org.choongang.member.mappers;
 
 public interface MemberMapper {
 
