@@ -1,5 +1,6 @@
 package org.choongang.main.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.choongang.global.config.annotations.Controller;
 import org.choongang.global.config.annotations.GetMapping;
 import org.choongang.global.config.annotations.RequestMapping;
@@ -11,8 +12,9 @@ public class MainController {
 
     // 반환값이 보이는 형태
     @GetMapping
-    public String index() {
+    public String index(HttpServletRequest request) {
+        request.setAttribute("addCss", new String[] {"main/style"});
 
-        return "index";
+        return "main/index";
     }
 }
