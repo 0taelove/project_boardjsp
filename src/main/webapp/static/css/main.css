@@ -90,8 +90,12 @@ header .search-box button i {
     font-size: 1.5rem;
 }
 
+header .logo > img {
+    height: 50px;
+}
+
 nav {
-    background: #FFD732;
+    background: #ffd700;
 }
 
 nav > .inner {
