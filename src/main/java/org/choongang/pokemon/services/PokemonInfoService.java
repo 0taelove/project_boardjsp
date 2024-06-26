@@ -4,14 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.choongang.global.ListData;
+import org.choongang.global.Pagination;
 import org.choongang.global.config.AppConfig;
 import org.choongang.global.config.annotations.Service;
 import org.choongang.global.services.ApiRequestService;
 import org.choongang.global.services.ObjectMapperService;
 import org.choongang.pokemon.controllers.PokemonSearch;
+import org.choongang.pokemon.entities.PokemonDetail;
 import org.choongang.pokemon.entities.api.ApiResult;
 import org.choongang.pokemon.entities.api.Item;
 import org.choongang.pokemon.entities.api.Pokemon;
+import org.choongang.pokemon.mappers.PokemonMapper;
 
 import java.net.http.HttpResponse;
 import java.util.Collections;
@@ -31,6 +35,7 @@ public class PokemonInfoService {
     private final ApiRequestService service;
     private final ObjectMapperService om;
     private final PokemonSaveService saveService;
+    private final PokemonMapper mapper;
 
     // 포켓몬 API URL
     private String apiUrl = AppConfig.get("pokemon.api.url");
@@ -120,7 +125,7 @@ public class PokemonInfoService {
      *
      */
     public void updateAll() {
-        Thread th = new Thread(() -> {
+        // Thread th = new Thread(() -> {
             PokemonSearch search = new PokemonSearch();
             search.setPage(1);
             search.setLimit(2000);
@@ -139,9 +144,42 @@ public class PokemonInfoService {
                 }
 
             });
-        });
+        // });
 
-        th.setDaemon(true);
-        th.start();
+        // th.setDaemon(true);
+        // th.start();
+    }
+
+    // 컨트롤쪽에 getList형태로 유입
+    public ListData<PokemonDetail> getList(PokemonSearch search) {
+
+        int page = search.getPage();
+        int limit = search.getLimit();
+        int offset = (page - 1) * limit; // 레코드 시작 위치
+        int endRows = offset + limit; // 레코드 검색 종료 위치
+
+        search.setOffset(offset);
+        search.setEndRows(endRows);
+
+        List<PokemonDetail> items = mapper.getList(search);
+
+        Pagination pagination = new Pagination();
+
+        return new ListData<>(items, pagination);
+
+    }
+
+    // 조회 메서드, null 처리하는 Optional 클래스
+    public Optional<PokemonDetail> get(long seq) {
+        PokemonDetail data = mapper.get(seq);
+        if (data != null) {
+            String rawData = data.getRawData();
+            try {
+                Pokemon pokemon = om.readValue(rawData, Pokemon.class);
+                data.setPokemon(pokemon); // 원 데이터 변환
+            } catch (JsonProcessingException e) {}
+        }
+
+        return Optional.ofNullable(data);
     }
 }
