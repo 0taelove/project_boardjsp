@@ -14,8 +14,8 @@
 <layout:common title="${title}">
     <jsp:attribute name="header">
         <div class="left">
-            <a href="${homeUrl}">
-                <img src="${logoUrl}" alt="로고">
+            <a href="${homeUrl}" class="logo">
+                <img src="${logoUrl}" alt="<fmt:message key='로고' />">
             </a>
         </div>
         <div class="right">

@@ -8,6 +8,10 @@ header {
     padding: 10px 30px;
 }
 
+header .logo > img {
+    height: 50px;
+}
+
 /* 내용 배치 */
 main {
     display: flex;
