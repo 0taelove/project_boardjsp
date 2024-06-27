@@ -68,7 +68,7 @@ public class PokemonInfoService {
     public List<Item> getApiList(PokemonSearch search) {
         int page = search.getPage() < 1 ? 1 : search.getPage();
         int limit = search.getLimit() < 1 ? 20 : search.getLimit();
-        int offset = (page - 1) * limit;
+        int offset = (page - 1) * limit + 1;
 
 
         List<Item> items = null;
@@ -108,10 +108,47 @@ public class PokemonInfoService {
                 pokemon = om.readValue(response.body(), Pokemon.class);
                 pokemon.setRawData(response.body());
 
+                /* 포켓몬 한글 이름, 한글 설명 추출 S */
+                HttpResponse<String> res = service.request("https://pokeapi.co/api/v2/pokemon-species/" + seq);
+                String body = res.body();
+
+                // 이름 추출 S
+                String text = body;
+                text = text.split("names")[1];
+                text = text.split("\"name\":\"ko\"")[1];
+                text = text.split("\"language\"")[0];
+                text = text.split("\"name\":")[1];
+
+
+                Pattern p = Pattern.compile("\"([^\"]+)\"");
+                Matcher matcher = p.matcher(text);
+                if (matcher.find()) {
+                    pokemon.setNameKr(matcher.group(1));
+                }
+                // 이름 추출 E
+
+                // 설명 추출 S
+                text = body;
+                text = text.split("flavor_text_entries")[1];
+                text = text.split("\"name\":\"ko\"")[0];
+                Pattern p2 = Pattern.compile("([ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+)");
+                Matcher matcher2 = p2.matcher(text);
+                if (matcher2.find()) {
+                    String key = matcher2.group(1);
+                    text = text.split(key)[1];
+                    text = text.split("\",\"language\"")[0];
+                    String description = key + " " + text;
+                    pokemon.setDescription(description);
+                }
+                // 설명 추출 E
+
+                /* 포켓몬 한글 이름, 한글 설명 추출 E */
+
+
                 saveService.save(pokemon);
 
             } catch (JsonProcessingException e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
@@ -125,37 +162,36 @@ public class PokemonInfoService {
      *
      */
     public void updateAll() {
-        // Thread th = new Thread(() -> {
-            PokemonSearch search = new PokemonSearch();
-            search.setPage(1);
-            search.setLimit(2000);
-            List<Item> items = getApiList(search);
-            items.forEach(item -> {
-                String url = item.getUrl();
-                Pattern p = Pattern.compile("/pokemon/(\\d*)/");
-                Matcher matcher = p.matcher(url);
-                if (matcher.find()) {
-                    long seq = Long.parseLong(matcher.group(1));
-                    try {
-                        update(seq);
-                    } catch (Exception e) {
-                        // 이미 추가된 포켓몬은 seq 번호 중복으로 무결성 제약조건 발생, 해당 건은 건너 뛴다.
-                    }
+        //Thread th = new Thread(() -> {
+        PokemonSearch search = new PokemonSearch();
+        search.setPage(1);
+        search.setLimit(2000);
+        List<Item> items = getApiList(search);
+        items.forEach(item -> {
+            String url = item.getUrl();
+            Pattern p = Pattern.compile("/pokemon/(\\d*)/");
+            Matcher matcher = p.matcher(url);
+            if (matcher.find()) {
+                long seq = Long.parseLong(matcher.group(1));
+                try {
+                    update(seq);
+                } catch (Exception e) {
+                    // 이미 추가된 포켓몬은 seq 번호 중복으로 무결성 제약조건 발생, 해당 건은 건너 뛴다.
                 }
+            }
 
-            });
-        // });
+        });
+        //});
 
-        // th.setDaemon(true);
-        // th.start();
+        //th.setDaemon(true);
+        //th.start();
     }
 
-    // 컨트롤쪽에 getList형태로 유입
     public ListData<PokemonDetail> getList(PokemonSearch search) {
 
         int page = search.getPage();
         int limit = search.getLimit();
-        int offset = (page - 1) * limit; // 레코드 시작 위치
+        int offset = (page - 1) * limit; // 레코드 검색 시작 위치
         int endRows = offset + limit; // 레코드 검색 종료 위치
 
         search.setOffset(offset);
@@ -163,13 +199,13 @@ public class PokemonInfoService {
 
         List<PokemonDetail> items = mapper.getList(search);
 
+
         Pagination pagination = new Pagination();
 
-        return new ListData<>(items, pagination);
 
+        return new ListData<>(items, pagination);
     }
 
-    // 조회 메서드, null 처리하는 Optional 클래스
     public Optional<PokemonDetail> get(long seq) {
         PokemonDetail data = mapper.get(seq);
         if (data != null) {
