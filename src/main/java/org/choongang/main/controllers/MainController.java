@@ -1,20 +1,19 @@
 package org.choongang.main.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.choongang.global.config.annotations.Controller;
 import org.choongang.global.config.annotations.GetMapping;
-import org.choongang.global.config.annotations.RequestMapping;
+import org.choongang.global.config.annotations.PathVariable;
 
-// 컨트롤러 객체로 관리되는 객체 정의
 @Controller
-@RequestMapping("/") // 기본값은 비어있는 형태
 public class MainController {
+    @GetMapping("/")
+    public String index() {
+        return "main/index";
+    }
 
-    // 반환값이 보이는 형태
-    @GetMapping
-    public String index(HttpServletRequest request) {
-        request.setAttribute("addCss", new String[] {"main/style"});
-
+    @GetMapping("/board/{seq}")
+    public String board(@PathVariable("seq") int seq) {
+        System.out.println(seq);
         return "main/index";
     }
 }

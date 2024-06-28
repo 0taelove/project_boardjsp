@@ -13,7 +13,8 @@ public class Member {
     private String email;
     private String password;
     private String userName;
-    private UserType userType = UserType.USER; // 기존과 달리 추가
+    private UserType userType = UserType.USER;
+    private long myPokemonSeq;  // 마이 포켓몬 seq 추가
     private LocalDateTime regDt;
     private LocalDateTime modDt;
 }
