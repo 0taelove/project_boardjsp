@@ -36,7 +36,7 @@ public class PokemonController {
         return "pokemon/index";
     }
 
-    @GetMapping("/{seq}")
+    @GetMapping("/view/{seq}")
     public String view(@PathVariable("seq") long seq) {
         commonProcess();
 
