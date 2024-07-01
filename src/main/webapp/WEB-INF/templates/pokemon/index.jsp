@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layouts" %>
+<%@ taglib prefix="util" tagdir="/WEB-INF/tags/utils" %>
 <c:url var="searchUrl" value="/pokemon" />
 
 <layout:main>
@@ -17,7 +18,7 @@
         <c:if test="${items != null && !items.isEmpty()}">
             <c:forEach var="item" items="${items}">
                 <li>
-                    <a href="<c:url value='/pokemon/view/${item.seq}' />">
+                    <a href="<c:url value='/pokemon/${item.seq}' />">
                         <img src="${item.frontImage}" alt="${item.nameKr}">
                         <div class="p-name">
                             ${item.nameKr}(${item.name})
@@ -28,5 +29,5 @@
         </c:if>
     </ul>
 </section>
-
+<util:pagination />
 </layout:main>
