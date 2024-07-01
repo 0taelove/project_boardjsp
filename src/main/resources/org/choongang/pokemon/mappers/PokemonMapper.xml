@@ -31,16 +31,19 @@
         SELECT * FROM (SELECT ROWNUM NUM, P.* FROM POKEMON P
         <where>
             <if test="skey != null and !skey.equals('')">
-                <bind name="keyword" value="'%' + _parameter.getSkey() + '%'" />
+                <bind name="keyword" value="'%' + _parameter.getSkey() + '%'"/>
                 AND P.NAME || P.NAME_KR || P.DESCRIPTION LIKE #{keyword}
             </if>
         </where>
-        ORDER BY P.SEQ
+        ORDER BY P.seq
         ) P2
-        WHERE
-        <![CDATA[
+        <if test="skey == null or skey == ''">
+            WHERE
+            <![CDATA[
             P2.SEQ >= #{offset} AND P2.SEQ < #{endRows}
         ]]>
+        </if>
+
     </select>
 
     <select id="getTotal" resultType="int">
