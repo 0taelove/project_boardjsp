@@ -16,13 +16,13 @@ public class PokemonSaveService {
         PokemonDetail detail = PokemonDetail.builder()
                 .seq(data.getId())
                 .name(data.getName())
-                .height(data.getHeight())
+                .nameKr(data.getNameKr())
                 .weight(data.getWeight())
+                .height(data.getHeight())
                 .baseExperience(data.getBase_experience())
                 .frontImage(data.getSprites().getOther().getOfficial_artwork().getFront_default())
                 .backImage(data.getSprites().getBack_default())
                 .rawData(data.getRawData())
-                .nameKr(data.getNameKr())
                 .description(data.getDescription())
                 .build();
         int result = mapper.register(detail);
