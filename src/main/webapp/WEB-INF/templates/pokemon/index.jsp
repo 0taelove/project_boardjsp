@@ -18,7 +18,7 @@
         <c:if test="${items != null && !items.isEmpty()}">
             <c:forEach var="item" items="${items}">
                 <li>
-                    <a href="<c:url value='/pokemon/${item.seq}' />">
+                    <a href="<c:url value='/pokemon/${item.seq}' />" class="shiney-button">
                         <img src="${item.frontImage}" alt="${item.nameKr}">
                         <div class="p-name">
                             ${item.nameKr}(${item.name})
