@@ -10,6 +10,7 @@ public class PokemonDetail extends AbstractPokemonDetail {
     private long num;
     private String name;
     private String nameKr;
+    private String types;
     private int weight;
     private int height;
     private int baseExperience;

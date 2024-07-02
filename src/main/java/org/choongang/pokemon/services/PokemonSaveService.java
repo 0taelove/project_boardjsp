@@ -17,6 +17,7 @@ public class PokemonSaveService {
                 .seq(data.getId())
                 .name(data.getName())
                 .nameKr(data.getNameKr())
+                .types(data.getPrimaryTypeName()) // types를 getPrimaryTypeName을 사용하여 저장
                 .weight(data.getWeight())
                 .height(data.getHeight())
                 .baseExperience(data.getBase_experience())
