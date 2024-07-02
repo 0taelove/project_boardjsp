@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Pokemon {
     private List<Ability> abilities;
     private int base_experience;
@@ -42,6 +42,14 @@ public class Pokemon {
     public String getPrimaryTypeName() {
         if (types != null && !types.isEmpty()) {
             return types.get(0).getType().getName(); // 첫 번째 타입의 이름을 반환
+        }
+        return null;
+    }
+
+    @JsonIgnore
+    public String getSecondaryTypeName() {
+        if (types != null && types.size() > 1) {
+            return types.get(1).getType().getName(); // 두 번째 타입의 이름을 반환
         }
         return null;
     }

@@ -17,7 +17,7 @@
             ${fn:replace(data.description, '\\n', '<br>')}
         </div>
         <div class="p-types">
-            속성 : ${data.types}
+            속성 : ${data.types1} ${data.types2}
         </div>
         <div class="p-hei">
             키 : ${String.format("%.1f", data.height * 0.1)}m

@@ -27,7 +27,7 @@
                             ${item.nameKr}
                         </div>
                         <div class="p-types">
-                            ${item.types} <!-- 번역된 타입 이름 출력 -->
+                            ${item.types1} ${item.types2}
                         </div>
                     </a>
                 </li>

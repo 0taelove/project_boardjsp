@@ -14,13 +14,16 @@ public class PokemonSaveService {
 
     public boolean save(Pokemon data) {
         String primaryTypeName = data.getPrimaryTypeName();
-        String translatedTypeName = TypeTranslator.translate(primaryTypeName);
+        String secondaryTypeName = data.getSecondaryTypeName();
+        String translatedPrimaryTypeName = TypeTranslator.translate(primaryTypeName);
+        String translatedSecondaryTypeName = TypeTranslator.translate(secondaryTypeName);
 
         PokemonDetail detail = PokemonDetail.builder()
                 .seq(data.getId())
                 .name(data.getName())
                 .nameKr(data.getNameKr())
-                .types(translatedTypeName) // 번역된 타입을 저장
+                .types1(translatedPrimaryTypeName) // 첫 번째 번역된 타입 저장
+                .types2(translatedSecondaryTypeName) // 두 번째 번역된 타입 저장
                 .weight(data.getWeight())
                 .height(data.getHeight())
                 .baseExperience(data.getBase_experience())
