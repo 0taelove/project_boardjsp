@@ -33,6 +33,8 @@ public class PokemonController {
         request.setAttribute("items", items);
         request.setAttribute("pagination", pagination);
 
+        request.setAttribute("addCss", new String[] {"pokemon/style", "pokemon/types"});
+
         return "pokemon/index";
     }
 
