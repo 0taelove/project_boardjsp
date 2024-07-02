@@ -20,8 +20,11 @@
                 <li>
                     <a href="<c:url value='/pokemon/${item.seq}' />" class="shiney-button">
                         <img src="${item.frontImage}" alt="${item.nameKr}">
+                        <div class="p-seq">
+                            No.000${item.seq}
+                        </div>
                         <div class="p-name">
-                            ${item.nameKr}(${item.name})
+                            ${item.nameKr}
                         </div>
                     </a>
                 </li>

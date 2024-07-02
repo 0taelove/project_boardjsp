@@ -7,6 +7,9 @@
         <img src="${data.frontImage}" alt="프론트">
         <img src="${data.backImage}" alt="백">
 
+        <div class="p-seq">
+            No.000${data.seq}
+        </div>
         <div class="p-name">
             ${data.nameKr}(${data.name})
         </div>
