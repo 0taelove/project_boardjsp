@@ -13,9 +13,12 @@
         <div class="p-desc">
             ${fn:replace(data.description, '\\n', '<br>')}
         </div>
-        참고 주조 : <a href='https://pokeapi.co/api/v2/pokemon/${data.seq}' target="_blank">https://pokeapi.co/api/v2/pokemon/${data.seq}</a>
-        <br><br><br>
-        ${data.pokemon}
+        <div class="p-hei">
+            키 : ${String.format("%.1f", data.height * 0.1)}m
+        </div>
+        <div class="p-wei">
+            몸무게 : ${String.format("%.1f", data.weight * 0.1)}kg
+        </div>
     </section>
 
 </layout:main>
