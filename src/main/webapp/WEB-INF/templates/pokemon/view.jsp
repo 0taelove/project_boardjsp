@@ -11,7 +11,7 @@
             No.000${data.seq}
         </div>
         <div class="p-name">
-            ${data.nameKr}(${data.name})
+            ${data.nameKr}
         </div>
         <div class="p-desc">
             ${fn:replace(data.description, '\\n', '<br>')}
