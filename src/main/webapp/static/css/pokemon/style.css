@@ -35,7 +35,6 @@
   text-decoration: none;
   color: #f1d873;
   border: 2px solid $color;
-  font-size: 24px;
   display: inline-block;
   border-radius: 0.3em;
   transition: all 0.2s ease-in-out;
@@ -49,7 +48,7 @@
     display: block;
     position: absolute;
     top: 0;
-    left: -4.5em;
+    left: -10em;
     transform: skewX(-45deg) translateX(0);
     transition: none;
   }
@@ -58,8 +57,66 @@
     color: #fff;
     border-bottom: 4px solid darken(#f1d873;, 10%);
     &:before {
-      transform: skewX(-45deg) translateX(13.5em);
-     transition: all 0.5s ease-in-out;
+      transform: skewX(-45deg) translateX(35em);
+     transition: all 1s ease-in-out;
     }
   }
 }
+
+.p-seq {
+    text-align: left;
+    font-size: 13px;
+}
+
+.p-types {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.p-types > span {
+    width: 0;
+    flex-grow: 1;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    padding: 3px 0;
+}
+
+.p-types > span+span {
+    margin-left: 5px;
+}
+
+/* 목록 검색 S */
+#frmSearch {
+    background: #393939;
+    padding: 10px 1px;
+    margin: 15px;
+    border-radius: 50px;
+}
+
+#frmSearch > .inner {
+    display: flex;
+}
+
+#frmSearch button {
+    width: 60px;
+    height: 56px;
+    margin: 0px 30px 0px 0px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#frmSearch .tit {
+    width: 150px;
+    line-height: 55px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+#frmSearch input[type='text'] {
+    flex-grow: 1;
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    height: 55px;
+}
+/* 목록 검색 E */

@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Type {
-    private int slot;
-    private TypeName type;
+class TypeName {
+    private String name;
 }

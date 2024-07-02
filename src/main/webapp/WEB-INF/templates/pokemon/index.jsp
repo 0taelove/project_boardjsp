@@ -6,10 +6,12 @@
 
 <layout:main>
 <section class="layout-width">
-    <form name="frmSearch" method="get" action="${searchUrl}" autocomplete="off">
-        포켓몬 검색 :
-        <input type="text" name="skey" value="${param.skey}" placeholder="검색어를 입력하세요.">
-        <button type="submit">검색</button>
+    <form id="frmSearch" name="frmSearch" method="get" action="${searchUrl}" autocomplete="off">
+        <div class="inner">
+            <div class='tit'>포켓몬 도감</div>
+            <input type="text" name="skey" value="${param.skey}" placeholder="포켓몬 이름을 입력해주세요.">
+            <button type="submit">검색</button>
+        </div>
     </form>
     <ul class="pokemon-list">
         <c:if test="${items == null || items.isEmpty()}">
@@ -20,8 +22,17 @@
                 <li>
                     <a href="<c:url value='/pokemon/${item.seq}' />" class="shiney-button">
                         <img src="${item.frontImage}" alt="${item.nameKr}">
+                        <div class="p-seq">
+                            No.000${item.seq}
+                        </div>
                         <div class="p-name">
-                            ${item.nameKr}(${item.name})
+                            ${item.nameKr}
+                        </div>
+                        <div class="p-types">
+                            <span class="type-${item.types1.toLowerCase()}">${item.types1}</span>
+                            <c:if test="${not empty item.types2}">
+                                <span class="type-${item.types2.toLowerCase()}">${item.types2}</span>
+                            </c:if>
                         </div>
                     </a>
                 </li>
