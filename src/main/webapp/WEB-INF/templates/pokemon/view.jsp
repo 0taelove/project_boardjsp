@@ -13,6 +13,9 @@
         <div class="p-desc">
             ${fn:replace(data.description, '\\n', '<br>')}
         </div>
+        <div class="p-types">
+            속성 : ${data.types}
+        </div>
         <div class="p-hei">
             키 : ${String.format("%.1f", data.height * 0.1)}m
         </div>
