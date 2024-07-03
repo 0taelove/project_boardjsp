@@ -57,7 +57,7 @@
     color: #fff;
     border-bottom: 4px solid darken(#f1d873;, 10%);
     &:before {
-      transform: skewX(-45deg) translateX(35em);
+      transform: skewX(-45deg) translateX(50em);
      transition: all 1s ease-in-out;
     }
   }
