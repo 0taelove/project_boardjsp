@@ -63,6 +63,7 @@
   }
 }
 
+/* 포켓몬 도감 페이지 S */
 .p-seq {
     text-align: left;
     font-size: 13px;
@@ -86,6 +87,11 @@
 .p-types > span+span {
     margin-left: 5px;
 }
+/* 포켓몬 도감 페이지 E */
+
+/* 포켓몬 도감 내부 S */
+
+/* 포켓몬 도감 내부 E */
 
 /* 목록 검색 S */
 #frmSearch {

@@ -15,7 +15,9 @@
     </form>
     <ul class="pokemon-list">
         <c:if test="${items == null || items.isEmpty()}">
-            <li class='no-data'>조회된 포켓몬이 없습니다.</li>
+            <li class='no-data'>검색결과가 없습니다.
+            <br>
+            다른 키워드로 검색해주세요.</li>
         </c:if>
         <c:if test="${items != null && !items.isEmpty()}">
             <c:forEach var="item" items="${items}">
