@@ -6,7 +6,6 @@
 <layout:main title="${data.nameKr}(${data.name})">
     <section class="pokemon-view">
         <img src="${data.frontImage}" alt="프론트">
-        <img src="${data.backImage}" alt="백">
         <br><br>
         <div class="pd-seq">
             No.000${data.seq}
